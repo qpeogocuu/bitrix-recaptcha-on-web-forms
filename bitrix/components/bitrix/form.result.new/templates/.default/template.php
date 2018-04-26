@@ -1,3 +1,4 @@
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <?
 if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
 ?>
@@ -89,11 +90,7 @@ if($arResult["isUseCaptcha"] == "Y")
 		</tr>
 		<tr>
 			<td>&nbsp;</td>
-			<td><input type="hidden" name="captcha_sid" value="<?=htmlspecialcharsbx($arResult["CAPTCHACode"]);?>" /><img src="/bitrix/tools/captcha.php?captcha_sid=<?=htmlspecialcharsbx($arResult["CAPTCHACode"]);?>" width="180" height="40" /></td>
-		</tr>
-		<tr>
-			<td><?=GetMessage("FORM_CAPTCHA_FIELD_TITLE")?><?=$arResult["REQUIRED_SIGN"];?></td>
-			<td><input type="text" name="captcha_word" size="30" maxlength="50" value="" class="inputtext" /></td>
+			<td><div class="g-recaptcha" data-sitekey="<?=RE_SITE_KEY?>"></div></td>
 		</tr>
 <?
 } // isUseCaptcha

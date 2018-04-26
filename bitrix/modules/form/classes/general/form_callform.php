@@ -1258,7 +1258,10 @@ class CAllForm extends CForm_old
 
 					if (($arForm["USE_CAPTCHA"] == "Y" && !$RESULT_ID && !defined('ADMIN_SECTION')))
 					{
-						if (!($GLOBALS["APPLICATION"]->CaptchaCheckCode($arrVALUES["captcha_word"], $arrVALUES["captcha_sid"])))
+						$recaptcha = new \ReCaptcha\ReCaptcha(RE_SEC_KEY);
+						$resp = $recaptcha->verify($_REQUEST['g-recaptcha-response'], $_SERVER['REMOTE_ADDR']);
+
+						if (!$resp->isSuccess())
 						{
 							CForm::__check_PushError($errors, GetMessage("FORM_WRONG_CAPTCHA"));
 						}
